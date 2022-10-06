@@ -1,8 +1,8 @@
 <?php
 
-namespace Descom\Skeleton\Tests\Unit;
+namespace Descom\EventNotificationManager\Tests\Unit;
 
-use Descom\Skeleton\Tests\TestCase;
+use Descom\EventNotificationManager\Tests\TestCase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
@@ -12,25 +12,25 @@ class InstallTest extends TestCase
     public function theInstallCommandCopiesTheConfiguration()
     {
         // make sure we're starting from a clean state
-        if (File::exists(config_path('skeleton.php'))) {
-            unlink(config_path('skeleton.php'));
+        if (File::exists(config_path('event_notification_manager.php'))) {
+            unlink(config_path('event_notification_manager.php'));
         }
 
-        $this->assertFalse(File::exists(config_path('skeleton.php')));
+        $this->assertFalse(File::exists(config_path('event_notification_manager.php')));
 
-        Artisan::call('skeleton:install');
+        Artisan::call('event_notification_manager:install');
 
-        $this->assertTrue(File::exists(config_path('skeleton.php')));
+        $this->assertTrue(File::exists(config_path('event_notification_manager.php')));
     }
 
     public function when_a_config_file_is_present_users_can_choose_to_not_overwrite_it()
     {
         // Given we have already have an existing config file
-        File::put(config_path('skeleton.php'), 'test contents');
-        $this->assertTrue(File::exists(config_path('skeleton.php')));
+        File::put(config_path('event_notification_manager.php'), 'test contents');
+        $this->assertTrue(File::exists(config_path('event_notification_manager.php')));
 
         // When we run the install command
-        $command = $this->artisan('skeleton:install');
+        $command = $this->artisan('event_notification_manager:install');
 
         // We expect a warning that our configuration file exists
         $command->expectsConfirmation(
@@ -43,21 +43,21 @@ class InstallTest extends TestCase
         $command->expectsOutput('Existing configuration was not overwritten');
 
         // Assert that the original contents of the config file remain
-        $this->assertEquals('test contents', file_get_contents(config_path('skeleton.php')));
+        $this->assertEquals('test contents', file_get_contents(config_path('event_notification_manager.php')));
 
         // Clean up
-        unlink(config_path('skeleton.php'));
+        unlink(config_path('event_notification_manager.php'));
     }
 
     /** @test */
     public function whenAConfigFileIsPresentUsersCanChooseToDoOverwriteIt()
     {
         // Given we have already have an existing config file
-        File::put(config_path('skeleton.php'), 'test contents');
-        $this->assertTrue(File::exists(config_path('skeleton.php')));
+        File::put(config_path('event_notification_manager.php'), 'test contents');
+        $this->assertTrue(File::exists(config_path('event_notification_manager.php')));
 
         // When we run the install command
-        $command = $this->artisan('skeleton:install');
+        $command = $this->artisan('event_notification_manager:install');
 
         // We expect a warning that our configuration file exists
         $command->expectsConfirmation(
@@ -74,10 +74,10 @@ class InstallTest extends TestCase
         // Assert that the original contents are overwritten
         $this->assertEquals(
             file_get_contents(__DIR__.'/../../config/config.php'),
-            file_get_contents(config_path('skeleton.php'))
+            file_get_contents(config_path('event_notification_manager.php'))
         );
 
         // Clean up
-        unlink(config_path('skeleton.php'));
+        unlink(config_path('event_notification_manager.php'));
     }
 }

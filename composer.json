@@ -1,5 +1,5 @@
 {
-    "name": "descom/skeleton",
+    "name": "descom/event_notification_manager",
     "description": "Template to generate a Laravel Package",
     "license": "MIT",
     "authors": [
@@ -22,13 +22,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Descom\\Skeleton\\": "src",
-            "Descom\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Descom\\EventNotificationManager\\": "src",
+            "Descom\\EventNotificationManager\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Descom\\Skeleton\\Tests\\": "tests"
+            "Descom\\EventNotificationManager\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -40,7 +40,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Descom\\Skeleton\\SkeletonServiceProvider"
+                "Descom\\EventNotificationManager\\EventNotificationManagerServiceProvider"
             ]
         }
     },

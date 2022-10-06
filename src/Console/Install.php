@@ -1,23 +1,23 @@
 <?php
 
-namespace Descom\Skeleton\Console;
+namespace Descom\EventNotificationManager\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
 class Install extends Command
 {
-    protected $signature = 'skeleton:install';
+    protected $signature = 'event_notification_manager:install';
 
-    protected $description = 'Install package Skeleton';
+    protected $description = 'Install package EventNotificationManager';
 
     public function handle()
     {
-        $this->info('Installing package Skeleton...');
+        $this->info('Installing package EventNotificationManager...');
 
         $this->info('Publishing configuration...');
 
-        if (! $this->configExists('skeleton.php')) {
+        if (! $this->configExists('event_notification_manager.php')) {
             $this->publishConfiguration();
         } else {
             if ($this->shouldOverwriteConfig()) {
@@ -27,7 +27,7 @@ class Install extends Command
             }
         }
 
-        $this->info('Installed package Skeleton');
+        $this->info('Installed package EventNotificationManager');
     }
 
     private function configExists($fileName)
@@ -48,7 +48,7 @@ class Install extends Command
         $this->info('Overwriting configuration file...');
 
         $params = [
-            '--provider' => "Descom\Skeleton\SkeletonServiceProvider",
+            '--provider' => "Descom\EventNotificationManager\EventNotificationManagerServiceProvider",
             '--tag' => 'config',
         ];
 
